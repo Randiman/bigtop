@@ -13,18 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM bigtop/puppet:PREFIX-OS-VERSION
+FROM bigtop/puppet:3.3.0-ubuntu-22.04
 
 MAINTAINER dev@bigtop.apache.org
 
-COPY bigtop_toolchain PUPPET_MODULES
+COPY bigtop_toolchain /usr/share/puppet/modules/bigtop_toolchain
 # 替换为阿里云或清华大学镜像源
 RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list && \
     sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list
 
 
 RUN if [ -f ~/.bash_profile ]; then . ~/.bash_profile; fi && \
-    UPDATE_SOURCE && \
+    apt-get clean && apt-get update && \
     puppet apply -e "include bigtop_toolchain::installer" || if [ $? -ne 2 ]; then exit 1; fi
 COPY . /tmp/bigtop
 RUN cd /tmp/bigtop && ./gradlew && cd && rm -rf /tmp/*

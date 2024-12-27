@@ -104,9 +104,13 @@ bigtop {
     'scala' { version = '2.12.13'; version_base = version }
   }
   apache {
+    APACHE_MIRROR = "https://repo.huaweicloud.com/apache"
+    APACHE_ARCHIVE = "https://mirrors.aliyun.com/apache"
+  }
+/**
     APACHE_MIRROR = "https://apache.osuosl.org"
     APACHE_ARCHIVE = "https://archive.apache.org/dist"
-  }
+*/
 /** End of Base Configuration */
 
   /** Dependencies section defines the order in which packages should be built.
