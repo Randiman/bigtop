@@ -95,7 +95,7 @@ class hadoop ($hadoop_security_authentication = "simple",
       path    => ['/bin','/sbin','/usr/bin','/usr/sbin'],
       command => 'bash -x /usr/lib/hadoop/libexec/init-hdfs.sh',
       require => Package['hadoop-hdfs'],
-      timeout => 600
+      timeout => 6000
     }
   }
 

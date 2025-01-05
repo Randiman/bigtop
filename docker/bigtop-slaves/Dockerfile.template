@@ -18,10 +18,6 @@ FROM bigtop/puppet:PREFIX-OS-VERSION
 MAINTAINER dev@bigtop.apache.org
 
 COPY bigtop_toolchain PUPPET_MODULES
-# 替换为阿里云或清华大学镜像源
-RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list && \
-    sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.aliyun.com/ubuntu/|g' /etc/apt/sources.list
-
 
 RUN if [ -f ~/.bash_profile ]; then . ~/.bash_profile; fi && \
     UPDATE_SOURCE && \

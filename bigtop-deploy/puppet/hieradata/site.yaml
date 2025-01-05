@@ -2,8 +2,8 @@
 ### This is very important to make sure this file doesn't contain any TAB
 ### symbols instead of spaces: the hiera YAML parser will choke to death with
 ### uncomprehensive error message and you'll waste a lot of time debugging it.
-bigtop::hadoop_head_node: "head.node.fqdn"
-#bigtop::standby_head_node: "standby.head.node.fqdn"
+bigtop::hadoop_head_node: "infra-dp1.ct.test"
+bigtop::standby_head_node: "infra-dp2.ct.test"
 
 hadoop::hadoop_storage_dirs:
   - /data/1
@@ -11,31 +11,31 @@ hadoop::hadoop_storage_dirs:
   - /data/3
   - /data/4
 
-#hadoop::common_hdfs::ha: "auto"
-#hadoop::common_hdfs::hadoop_namenode_host:
-#  - "%{hiera('bigtop::hadoop_head_node')}"
-#  - "%{hiera('bigtop::standby_head_node')}"
-#hadoop_cluster_node::hadoop_namenode_uri: "hdfs://ha-nn-uri:8020"
+hadoop::common_hdfs::ha: "auto"
+hadoop::common_hdfs::hadoop_namenode_host:
+  - "%{hiera('bigtop::hadoop_head_node')}"
+  - "%{hiera('bigtop::standby_head_node')}"
+hadoop_cluster_node::hadoop_namenode_uri: "hdfs://ct-bigtop-test:8020"
 
-#hadoop_cluster_node::cluster_components:
-#  - alluxio
-#  - flink
-#  - hbase
-#  - hcat
-#  - hive
-#  - httpfs
-#  - mapred-app
-#  - solr
-#  - spark
-#  - spark-standalone
-#  - tez
-#  - yarn
-#  - zookeeper
+hadoop_cluster_node::cluster_components:
+  - hdfs-ha
+  - yarn
+  - spark
+  - alluxio
+  - flink
+  - hcat
+  - httpfs
+  - hive
+  - zookeeper
+  - livy
 
+#bigtop::bigtop_repo_default_version: "3.3.0"
+bigtop::hadoop_gateway_node: true
 #bigtop::roles_enabled: false
 
 ## You can specify one (or more) repositories. It is convenient if
 ## you provide hotfix repo separately from the stable release, etc.
-#bigtop::bigtop_repo_uri:
-#   - "http://mirror1.example.com/path/to/mirror/"
-#   - "http://mirror2.example.com/path/to/mirror/"
+bigtop::bigtop_repo_uri:
+   - "http://192.168.101.49/bigtop"
+#   - "http://repos.bigtop.apache.org/releases/3.3.0/rockylinux/8/x86_64"
+
