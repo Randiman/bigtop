@@ -16,7 +16,7 @@
 class python {
     case $operatingsystem {
         /(?i:(centos|fedora|redhat|rocky))/: {
-            package { 'python3-devel':
+            package { 'python36-devel':
               ensure => 'present',
             }
             if ($operatingsystem != 'Fedora') {

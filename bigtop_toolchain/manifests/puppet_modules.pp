@@ -16,7 +16,7 @@
 class bigtop_toolchain::puppet_modules {
 
   exec { 'install-puppet-stdlib':
-    path    => '/usr/bin:/bin',
+    path    => '/usr/bin:/bin:/opt/puppetlabs/bin',
     command => 'puppet module install puppetlabs-stdlib --version 4.12.0',
     creates => '/etc/puppet/modules/stdlib',
   }

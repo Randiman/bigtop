@@ -22,6 +22,13 @@ class nfs::client::params {
       $nfs_version     = 4
     }
 
+    /(CentOS|RedHat|Rocky) 8/: {
+      $package_names   = [ "rpcbind", "nfs-utils" ]
+      $portmap_service = "rpcbind"
+      $idmapd_service  = "rpcidmapd"
+      $nfs_version     = 4
+    }
+    
     /(CentOS|RedHat) 5/: {
       $package_names   = [ "portmap", "nfs-utils" ]
       $portmap_service = "portmap"

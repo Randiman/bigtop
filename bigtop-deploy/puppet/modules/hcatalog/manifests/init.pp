@@ -26,18 +26,18 @@ class hcatalog {
   }
 
   class server($port = "9083", $kerberos_realm = "") {
-    package { "hcatalog-server":
+    package { "hive-hcatalog-server":
       ensure => latest,
     }
 
     file { "/etc/default/hcatalog-server":
       content => template("hcatalog/hcatalog-server"),
-      require => Package["hcatalog-server"],
+      require => Package["hive-hcatalog-server"],
     }
 
-    service { "hcatalog-server":
+    service { "hive-hcatalog-server":
       ensure => running,
-      require => [ Package["hcatalog-server"], File["/etc/default/hcatalog-server"] ],
+      require => [ Package["hive-hcatalog-server"], File["/etc/default/hcatalog-server"] ],
       hasrestart => true,
       hasstatus => true,
     } 

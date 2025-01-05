@@ -24,11 +24,15 @@ class nfs::client::service inherits nfs::client::params {
   }
 
   if ($nfs_version >= 4) {
+    $service_pattern = $idmapd_service ? {
+      'nfs-idmapd' => 'nfs-idmapd',
+      default      => 'rpc.idmapd',
+    }
     service { $idmapd_service:
       ensure  => running,
       enable  => true,
       require => [ Service[$portmap_service], Package[$package_names] ],
-      pattern => "rpc.idmapd",
+      pattern => $service_pattern,
     }
   }
 }
